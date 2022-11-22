@@ -1,41 +1,40 @@
 package ru.netology.Tournament.repository;
 
-import ru.netology.Tournament.domain.Player;
-
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
 
-    ArrayList<Player> playerList = new ArrayList<>();
+    HashMap<String, Integer> playerList = new HashMap<>();
 
-    public void register(Player player) {
-        playerList.add(player);
+    public void register(String name, Integer strength) {
+        playerList.put(name, strength);
     }
 
     public int round(String playerName1, String playerName2) {
-        Player tmp1 = findByName(playerName1);
-        Player tmp2 = findByName(playerName2);
-        if (tmp1 == null | tmp2 == null) {
+        int tmp1 = findByName(playerName1);
+        int tmp2 = findByName(playerName2);
+        if (tmp1 == 0 | tmp2 == 0) {
             throw new NotFoundException(
                     "Element with name: " + playerName1 + " or " + playerName2 + " not found."
             );
         }
-        if (tmp1.getStrength() < tmp2.getStrength()) {
+        if (tmp1 < tmp2) {
             return 2;
         }
-        if (tmp1.getStrength() > tmp2.getStrength()) {
+        if (tmp1 > tmp2) {
             return 1;
         }
         return 0;
     }
 
-    public Player findByName(String playerName) {
-        for (Player player : playerList) {
-            if (player.getName().equals(playerName)) {
-                return player;
+    public int findByName(String playerName) {
+        for (String key : playerList.keySet()) {
+            if (key.equals(playerName)) {
+                int value = playerList.get(key);
+                return value;
             }
         }
-        return null;
+        return 0;
     }
 
 }

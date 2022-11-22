@@ -2,17 +2,8 @@ package ru.netology.Tournament.domain;
 
 public class Player {
     // поля id, name, strength
-    protected int id;
     protected String name;
     protected int strength;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -30,8 +21,7 @@ public class Player {
         this.strength = strength;
     }
 
-    public Player(int id, String name, int strength) {
-        this.id = id;
+    public Player(String name, int strength) {
         this.name = name;
         this.strength = strength;
 
